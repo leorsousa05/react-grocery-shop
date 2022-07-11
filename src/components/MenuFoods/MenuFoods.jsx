@@ -3,16 +3,19 @@ import { useFoods } from '../../hooks/useFoods'
 import { FoodCard, Main } from './Style'
 
 export default function MenuFoods() {
-  const { foods } = useFoods()
+  const { categorizedFoods } = useFoods()
   return (
     <Main>
-        {}
-        <FoodCard
-          name={}
-          price={}
-          image={}
-          description={}
-        />
+        {categorizedFoods.map((food) => (
+          <FoodCard
+            key={food.id}
+            name={food.name}
+            price={food.price}
+            image={food.image}
+            description={food.description}
+            id={food.id}
+          />
+        ))}
     </Main>
   )
 }

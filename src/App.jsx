@@ -1,14 +1,19 @@
 import React from 'react'
 import MenuFoods from './components/MenuFoods/MenuFoods';
 import MenuHeader from './components/MenuHeader/MenuHeader';
-import {  } from "./"
+import { FoodsContextProvider } from './hooks/useFoods';
+import { FoodsToCartProvider } from './hooks/useFoodsToCart';
 
 function App() {
   return (
-    <div className="App">
-      <MenuHeader />
-      <MenuFoods />
-    </div>
+    <>
+      <FoodsContextProvider>
+        <FoodsToCartProvider>
+          <MenuHeader />
+          <MenuFoods />
+        </FoodsToCartProvider>
+      </FoodsContextProvider>
+    </>
   );
 }
 

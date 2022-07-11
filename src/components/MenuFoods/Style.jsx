@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components"
+import { Button } from "../MenuHeader/Style";
+import { useFoodToCart } from "../../hooks/useFoodsToCart";
 
 export const Main = styled.main`
     height: calc(100vh - 30.2vh);
@@ -36,20 +38,39 @@ export const StyledFoodCard = styled.div`
         width: 24rem;
         height: 18rem;
     }
+
+    & .buttons {
+        display: flex;
+        justify-content: center;
+    }
+
 `;
 
-export function FoodCard({ name, price, image, description }) {
+export function FoodCard({ name, price, image, description, id }) {
+    const { foodsInCart ,setFoodsInCart } = useFoodToCart()
+
     return(
         <StyledFoodCard>
             <img src={image} alt="" />
             <div className="nameAndPrice">
                 <p>{name}</p>
-                <p>{price}</p>
+                <p>R$ {price.toFixed(2)}</p>
             </div>
             <div className="description">
                 <p>
                     {description}
                 </p>
+            </div>
+            <div className="buttons">
+                <Button onClick={() => {
+                    foodsInCart.some(food => food.id === id) ? setFoodsInCart([...foodsInCart]) :setFoodsInCart([...foodsInCart, {
+                        name: name,
+                        price: price,
+                        image: image,
+                        description: description,
+                        id: id,
+                    }])
+                }}>Comprar</Button>
             </div>
         </StyledFoodCard>
     )
